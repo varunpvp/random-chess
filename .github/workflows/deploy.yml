@@ -8,20 +8,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@master
         with:
           persist-credentials: false
       - uses: actions/setup-node@master
         with:
           node-version: 12
-      - name: Install Deps
-        run: yarn
-      - name: Build
-        run: yarn build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+
+      - name: Install and Build 🔧
+        run: |
+          yarn
+          yarn build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: build
+          CLEAN: true
